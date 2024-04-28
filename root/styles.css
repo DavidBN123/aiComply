@@ -40,7 +40,7 @@ body, html {
     font-size: 16px;
     font-weight: bold;
     color: white;
-    background: #6E48AA; /* Dark inner fill */
+    background: #2a2a2a; /* Dark inner fill */
     border-radius: 30px;
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
@@ -50,43 +50,51 @@ body, html {
     position: relative;
     overflow: hidden;
     user-select: none;
-    filter: grayscale(100[])
-    border: 3px solid #6E48AA; /* solid border around the button */
+    filter: grayscale(100%);
+    border: 3px solid #6E48AA; /* Solid border around the button */
 }
 
 .animated-gradient-button::before {
-    filter: grayscale(100%)
     content: '';
     position: absolute;
-    top: -1px; /* align with the border */
-    left: -150%; /* start from the left */
-    width: 300%; /* enough width to cover the diagonal movement */
-    height: calc(100% + 2px); /* height of the button plus border */
+    top: -1px; /* Align with the border */
+    left: -150%; /* Start from the left */
+    width: 300%; /* Enough width to cover the diagonal movement */
+    height: calc(100% + 2px); /* Height of the button plus border */
     background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.6), transparent);
     transition: left 0.7s ease-in-out;
     will-change: left;
     z-index: 0;
-    clip-path: inset(0); /* ensure the shine does not overflow the border */
+    clip-path: inset(0); /* Ensure the shine does not overflow the border */
 }
 
+.animated-gradient-button {
+    --shine-position: 50%; /* Default to center for initial state */
+    border: 3px solid transparent;
+    background: linear-gradient(45deg, #2a2a2a, #2a2a2a) padding-box,
+                linear-gradient(45deg, rgba(255,255,255,0.2), rgba(255,255,255,0.5) var(--shine-position), rgba(255,255,255,0.2)) border-box;
+    background-origin: border-box;
+}
+ 
+
 .animated-gradient-button:hover {
-    transform: scale(1.05); /* slightly enlarge on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover for better visibility */
 }
 
 .animated-gradient-button:focus {
-    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5); /* Focus state for accessibility */
 }
 
 .animated-gradient-button:active {
-    transform: scale(0.95); /* shrink when clicked */
+    transform: scale(0.95); /* Shrink when clicked */
 }
 
 
 
-.animated-gradient-button::before {
-    animation: shine-effect 3s linear infinite;
-}
 
-.animated-gradient-button:hover::before {
-    animation-play-state: paused; /* pause shine effect on hover */
+@keyframes shine-effect {
+    to {
+        left: 100%; /* End at the right */
+    }
 }

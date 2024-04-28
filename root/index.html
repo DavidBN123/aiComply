@@ -17,10 +17,20 @@
             <h1>AiComply</h1>
         </div>
         <div class="button-container">
-            <button class="animated-gradient-button">
-                Get Started
-            </button>
-        </div>    
+            <button class="animated-gradient-button">Get Started</button>
+        </div>
+    
+        <script>
+            $(document).ready(function() {
+                $('.animated-gradient-button').mousemove(function(event) {
+                    var rect = this.getBoundingClientRect();
+                    var x = event.clientX - rect.left; // x position within the element.
+                    var width = $(this).innerWidth();
+                    var percentage = x / width * 100;
+                    $(this).css('--shine-position', `${percentage}%`);
+                });
+            });
+        </script>
     </div>
 
 
